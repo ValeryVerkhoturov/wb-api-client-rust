@@ -1,7 +1,7 @@
 /*
  * Общее
  *
- * В этом разделе: - [общая информация о WB API](https://dev.wildberries.ru/openapi/api-information#tag/introduction) - как [начать работу с WB API](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Kak-nachat-rabotu-s-API) - как [авторизоваться](https://dev.wildberries.ru/openapi/api-information#tag/authorization) и [создавать токены](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-sozdat-personalnyj-bazovyj-ili-testovyj-token) - основные [статус-коды ответов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Status-kody-HTTP) - [лимиты запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) - как обратиться в [поддержку](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Podderzhka) С помощью методов этого раздела вы можете: - проверить [подключение к WB API](https://dev.wildberries.ru/openapi/api-information#tag/connectionCheck/operation/getPing) - получить [новости портала продавцов](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News) - получить [информацию о продавце](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation/operation/getV1SellerInfo) - [управлять пользователями продавца](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement)
+ * В этом разделе: - [общая информация о WB API](https://dev.wildberries.ru/openapi/api-information#tag/introduction) - как [начать работу с WB API](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Kak-nachat-rabotu-s-API) - как [авторизоваться](https://dev.wildberries.ru/openapi/api-information#tag/authorization) и [создавать токены](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Kak-sozdat-personalnyj-bazovyj-ili-testovyj-token) - основные [статус-коды ответов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Status-kody-HTTP) - [лимиты запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) - как обратиться в [поддержку](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Podderzhka) С помощью методов этого раздела вы можете: - проверить [подключение к WB API](https://dev.wildberries.ru/openapi/api-information#tag/connectionCheck/operation/getPing) - получить [новости](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV2News) и [уведомления](https://dev.wildberries.ru/openapi/api-information#tag/newsApi/operation/getV1Notifications) портала продавцов - получить [информацию о продавце](https://dev.wildberries.ru/openapi/api-information#tag/sellerInformation/operation/getV1SellerInfo) - [управлять пользователями продавца](https://dev.wildberries.ru/openapi/api-information#tag/sellerUserManagement)
  *
  * The version of the OpenAPI document: general
  *
@@ -30,6 +30,17 @@ pub enum DeleteV1UserError {
 pub enum GetPingError {
     Status401(models::GetPing401Response),
     Status403(models::GetPing403Response),
+    Status429(models::GetPing401Response),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_v1_notifications`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetV1NotificationsError {
+    Status400(models::SellerNotificationsError),
+    Status401(models::GetPing401Response),
+    Status403(models::GetV1Notifications403Response),
     Status429(models::GetPing401Response),
     UnknownValue(serde_json::Value),
 }
@@ -194,6 +205,64 @@ pub async fn get_ping(
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
         let local_var_entity: Option<GetPingError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent {
+            status: local_var_status,
+            content: local_var_content,
+            entity: local_var_entity,
+        };
+        Err(Error::ResponseError(local_var_error))
+    }
+}
+
+/// Метод возвращает список уведомлений из [профиля](https://seller.wildberries.ru) продавца на русском языке. Порядок уведомлений в ответе — от новых к старым. Доступно только для продавцов из РФ.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Сервисный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый с секретом | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-communications-v1-notifications
+pub async fn get_v1_notifications(
+    configuration: &configuration::Configuration,
+    from: Option<&str>,
+    timezone: Option<&str>,
+    limit: Option<i64>,
+) -> Result<models::GetV1NotificationsResponse200, Error<GetV1NotificationsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!(
+        "{}/api/communications/v1/notifications",
+        local_var_configuration.base_path
+    );
+    let mut local_var_req_builder =
+        local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    if let Some(ref local_var_str) = from {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("from", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = timezone {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("timezone", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = limit {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("limit", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder =
+            local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
+    };
+
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetV1NotificationsError> =
+            serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent {
             status: local_var_status,
             content: local_var_content,
@@ -429,7 +498,7 @@ pub async fn get_v1_users(
     }
 }
 
-/// Метод позволяет получать новости портала продавцов.  Для получения успешного ответа необходимо указать один из параметров `from` или `fromID`.  За один запрос можно получить не более 100 новостей.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Сервисный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый с секретом | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-communications-v2-news
+/// Метод позволяет получать [новости](https://seller.wildberries.ru/news-v2) портала продавцов.  Для получения успешного ответа необходимо указать один из параметров `from` или `fromID`.  За один запрос можно получить не более 100 новостей.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Сервисный | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый с секретом | 1 мин | 1 запрос | 1 мин | 10 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/general/get-api-communications-v2-news
 pub async fn get_v2_news(
     configuration: &configuration::Configuration,
     from: Option<&str>,
