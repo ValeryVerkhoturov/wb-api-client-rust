@@ -14,13 +14,13 @@ use serde::{Deserialize, Serialize};
 /// TableOfficeItem : Данные по складу
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TableOfficeItem {
-    /// Регион отгрузки. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `Склад WB`
+    /// [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
     #[serde(rename = "regionName", skip_serializing_if = "Option::is_none")]
     pub region_name: Option<String>,
-    /// ID склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `-999999`
+    /// [ID склада](https://dev.wildberries.ru/release-notes?id=605)
     #[serde(rename = "officeID", skip_serializing_if = "Option::is_none")]
     pub office_id: Option<i64>,
-    /// Название склада. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) для складов WB может быть только `\"\"`
+    /// [Название склада](https://dev.wildberries.ru/release-notes?id=605)
     #[serde(rename = "officeName", skip_serializing_if = "Option::is_none")]
     pub office_name: Option<String>,
     /// Метрики склада

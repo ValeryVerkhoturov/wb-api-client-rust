@@ -13,10 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TableShippingOfficeItemOfficesInner {
-    /// ID склада
+    /// [ID склада](https://dev.wildberries.ru/release-notes?id=605)
     #[serde(rename = "officeID", skip_serializing_if = "Option::is_none")]
     pub office_id: Option<i64>,
-    /// Название склада
+    /// [Название склада](https://dev.wildberries.ru/release-notes?id=605)
     #[serde(rename = "officeName", skip_serializing_if = "Option::is_none")]
     pub office_name: Option<String>,
     /// Метрики по складу

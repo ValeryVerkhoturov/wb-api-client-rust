@@ -70,6 +70,7 @@ pub enum DeleteV3SuppliesSupplyIdTrbxError {
 #[serde(untagged)]
 pub enum GetV3FbsDictionariesCountriesOksmError {
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::GetV3FbsSuppliesSupplyIdShippingPoints403Response),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -92,6 +93,7 @@ pub enum GetV3FbsOrdersArchiveError {
 #[serde(untagged)]
 pub enum GetV3FbsSettingsAutoreturnsError {
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Response4Xx),
     Status406(models::ApiErrorV3),
     Status429(models::GetV3PassesOffices401Response),
@@ -104,6 +106,7 @@ pub enum GetV3FbsSettingsAutoreturnsError {
 pub enum GetV3FbsSettingsAutoreturnsSubcategoriesRestrictedError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Response4Xx),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -115,6 +118,7 @@ pub enum GetV3FbsSettingsAutoreturnsSubcategoriesRestrictedError {
 pub enum GetV3FbsShippingPointsError {
     Status400(models::Error),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::GetV3FbsSuppliesSupplyIdShippingPoints403Response),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -139,6 +143,7 @@ pub enum GetV3FbsSuppliesSupplyIdShippingPointsError {
 pub enum GetV3FbsSuppliesSupplyIdStickersSpotError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::GetV3FbsSuppliesSupplyIdShippingPoints403Response),
     Status404(models::ApiErrorV3),
     Status429(models::GetV3PassesOffices401Response),
@@ -273,6 +278,7 @@ pub enum GetV3SuppliesSupplyIdTrbxError {
 pub enum PatchV3FbsSettingsAutoreturnsError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Response4Xx),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -284,6 +290,7 @@ pub enum PatchV3FbsSettingsAutoreturnsError {
 pub enum PatchV3FbsSettingsAutoreturnsItemsError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Response4Xx),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -295,6 +302,7 @@ pub enum PatchV3FbsSettingsAutoreturnsItemsError {
 pub enum PatchV3FbsSuppliesShippingMethodError {
     Status400(models::Error),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Error),
     Status409(models::V3PeriodApiError),
     Status429(models::GetV3PassesOffices401Response),
@@ -359,6 +367,7 @@ pub enum PatchV3SuppliesSupplyIdOrdersError {
 pub enum PostV3FbsSettingsAutoreturnsItemsError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::Response4Xx),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -370,6 +379,7 @@ pub enum PostV3FbsSettingsAutoreturnsItemsError {
 pub enum PostV3FbsSuppliesSpotListError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::GetV3FbsSuppliesSupplyIdShippingPoints403Response),
     Status429(models::GetV3PassesOffices401Response),
     UnknownValue(serde_json::Value),
@@ -508,6 +518,7 @@ pub enum PostV3SuppliesSupplyIdTrbxStickersError {
 pub enum PutV3FbsSuppliesSupplyIdSpotError {
     Status400(models::ApiErrorV3),
     Status401(models::GetV3PassesOffices401Response),
+    Status402(models::GetV3PassesOffices402Response),
     Status403(models::GetV3FbsSuppliesSupplyIdShippingPoints403Response),
     Status404(models::ApiErrorV3),
     Status409(models::ApiErrorV3),

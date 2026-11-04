@@ -68,6 +68,7 @@ pub enum PostV3ClickCollectOrdersClientIdentityError {
 pub enum PostV3ClickCollectOrdersFinalPriceError {
     Status400(models::ApiPeriodBatchError),
     Status401(models::GetV3ClickCollectOrdersNew401Response),
+    Status402(models::GetV3ClickCollectOrdersNew402Response),
     Status403(models::ApiPeriodBatchError),
     Status429(models::GetV3ClickCollectOrdersNew401Response),
     UnknownValue(serde_json::Value),
@@ -79,6 +80,7 @@ pub enum PostV3ClickCollectOrdersFinalPriceError {
 pub enum PostV3ClickCollectOrdersMetaCustomsDeclarationError {
     Status400(models::ApiPeriodBatchError),
     Status401(models::GetV3ClickCollectOrdersNew401Response),
+    Status402(models::GetV3ClickCollectOrdersNew402Response),
     Status403(models::Error),
     Status429(models::GetV3ClickCollectOrdersNew401Response),
     UnknownValue(serde_json::Value),
@@ -102,6 +104,7 @@ pub enum PostV3ClickCollectOrdersMetaDeleteError {
 pub enum PostV3ClickCollectOrdersMetaDetailsError {
     Status400(models::ApiPeriodBatchError),
     Status401(models::GetV3ClickCollectOrdersNew401Response),
+    Status402(models::GetV3ClickCollectOrdersNew402Response),
     Status403(models::ApiPeriodBatchError),
     Status429(models::GetV3ClickCollectOrdersNew401Response),
     UnknownValue(serde_json::Value),
