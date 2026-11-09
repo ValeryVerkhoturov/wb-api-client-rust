@@ -28,9 +28,6 @@ pub struct Timestamps {
         skip_serializing_if = "Option::is_none"
     )]
     pub started: Option<Option<String>>,
-    /// Время удаления кампании. Если кампания не удалена, время указывается в будущем
-    #[serde(rename = "deleted", skip_serializing_if = "Option::is_none")]
-    pub deleted: Option<String>,
 }
 
 impl Timestamps {
@@ -40,7 +37,6 @@ impl Timestamps {
             created: None,
             updated: None,
             started: None,
-            deleted: None,
         }
     }
 }

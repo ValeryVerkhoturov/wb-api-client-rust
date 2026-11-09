@@ -41,7 +41,7 @@ pub enum GetV0BidsRecommendationsError {
 pub enum GetV0DailyLimitsError {
     Status400(models::Response400),
     Status401(models::GetV1PromotionCount401Response),
-    Status403(models::GetV1PromotionCount403Response),
+    Status403(models::Response4Xx),
     Status429(models::GetV1PromotionCount401Response),
     UnknownValue(serde_json::Value),
 }
@@ -243,6 +243,16 @@ pub enum GetV2AdvertsError {
     Status400(models::Response400),
     Status401(models::GetV1PromotionCount401Response),
     Status403(models::GetV1PromotionCount403Response),
+    Status429(models::GetV1PromotionCount401Response),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_v3_adverts`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetV3AdvertsError {
+    Status400(models::Response400),
+    Status401(models::GetV1PromotionCount401Response),
     Status429(models::GetV1PromotionCount401Response),
     UnknownValue(serde_json::Value),
 }
@@ -476,7 +486,7 @@ pub enum PutV0AuctionPlacementsError {
 pub enum PutV0DailyLimitsError {
     Status400(models::Response400),
     Status401(models::GetV1PromotionCount401Response),
-    Status403(models::GetV1PromotionCount403Response),
+    Status403(models::Response4Xx),
     Status429(models::GetV1PromotionCount401Response),
     UnknownValue(serde_json::Value),
 }
@@ -618,7 +628,7 @@ pub async fn get_v0_daily_limits(
     }
 }
 
-/// Метод удаляет [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусе `4` — готова к запуску.  После удаления кампания некоторое время будет находиться в статусе `-1` — кампания в процессе удаления. Полное удаление кампании занимает от 3 до 10 минут.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-delete
+/// Метод удаляет [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) в статусе `4` — готова к запуску.  После удаления кампания некоторое время будет находиться в статусе `-1` — кампания в процессе удаления. Полное удаление кампании занимает от 3 до 10 минут.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-delete
 pub async fn get_v0_delete(
     configuration: &configuration::Configuration,
     id: i64,
@@ -660,7 +670,7 @@ pub async fn get_v0_delete(
     }
 }
 
-/// Метод ставит [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусе `9` — активна — на паузу.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-pause
+/// Метод ставит [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) в статусе `9` — активна — на паузу.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-pause
 pub async fn get_v0_pause(
     configuration: &configuration::Configuration,
     id: i64,
@@ -702,7 +712,7 @@ pub async fn get_v0_pause(
     }
 }
 
-/// Метод запускает [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусах `4` — готово к запуску — или `11` — пауза. Чтобы запустить кампанию, проверьте ее бюджет. Если бюджета недостаточно, [пополните его](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV1BudgetDeposit).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-start
+/// Метод запускает [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) в статусах `4` — готово к запуску — или `11` — пауза. Чтобы запустить кампанию, проверьте ее бюджет. Если бюджета недостаточно, [пополните его](https://dev.wildberries.ru/openapi/promotion#tag/finances/operation/postV1BudgetDeposit).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-start
 pub async fn get_v0_start(
     configuration: &configuration::Configuration,
     id: i64,
@@ -744,7 +754,7 @@ pub async fn get_v0_start(
     }
 }
 
-/// Метод завершает [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) в статусах: - `9` — активна - `11` — пауза  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-stop
+/// Метод завершает [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) в статусах: - `9` — активна - `11` — пауза  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 5 запросов | 12 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v0-stop
 pub async fn get_v0_stop(
     configuration: &configuration::Configuration,
     id: i64,
@@ -1166,7 +1176,7 @@ pub async fn get_v1_calendar_promotions_nomenclatures(
     }
 }
 
-/// Метод возвращает валюту, код валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) и допустимые шаги ставок для метода [POST /api/advert/v1/normquery/bids](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)  Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по **Персональному** токену, **Сервисному** токену  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | | 1 мин | 1 запрос | 1 мин | 10 запросов |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v1-config
+/// Метод возвращает валюту, код валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances) и допустимые шаги ставок для метода [установки ставок для поисковых кластеров в валюте профиля продавца](https://dev.wildberries.ru/openapi/promotion#tag/searchClusters/operation/postV1NormqueryBids)  Метод [доступен](https://dev.wildberries.ru/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API) по **Персональному** токену, **Сервисному** токену  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | | 1 мин | 1 запрос | 1 мин | 10 запросов |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v1-config
 pub async fn get_v1_config(
     configuration: &configuration::Configuration,
 ) -> Result<models::V2GetConfigResponse, Error<GetV1ConfigError>> {
@@ -1295,7 +1305,7 @@ pub async fn get_v1_payments(
     }
 }
 
-/// Метод возвращает списки всех [рекламных кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 4 запроса | 15 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-promotion-count
+/// Метод возвращает списки всех [кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts) продавца с их ID. Кампании сгруппированы по типу и статусу, у каждой указана дата последнего изменения.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 4 запроса | 15 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-promotion-count
 pub async fn get_v1_promotion_count(
     configuration: &configuration::Configuration,
 ) -> Result<models::GetV1PromotionCountResponse200, Error<GetV1PromotionCountError>> {
@@ -1338,7 +1348,7 @@ pub async fn get_v1_promotion_count(
     }
 }
 
-/// Метод возвращает список [предметов](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll), которые можно добавить в рекламную [кампанию](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 12 сек | 1 запрос | 12 сек | 5 запросов | | Сервисный | 12 сек | 1 запрос | 12 сек | 5 запросов | | Базовый с секретом | 12 сек | 1 запрос | 12 сек | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-supplier-subjects
+/// Метод возвращает список [предметов](https://dev.wildberries.ru/openapi/item-management#tag/categoriesSubcategoriesAndCharacteristics/operation/getV2ObjectAll), которые можно добавить в рекламную [кампанию](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 12 сек | 1 запрос | 12 сек | 5 запросов | | Сервисный | 12 сек | 1 запрос | 12 сек | 5 запросов | | Базовый с секретом | 12 сек | 1 запрос | 12 сек | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-adv-v1-supplier-subjects
 pub async fn get_v1_supplier_subjects(
     configuration: &configuration::Configuration,
     payment_type: Option<&str>,
@@ -1429,7 +1439,7 @@ pub async fn get_v1_upd(
     }
 }
 
-/// Метод возвращает информацию о рекламных кампаниях с единой или ручной ставкой по их статусам, типам оплаты и ID.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v2-adverts
+/// Метод будет отключен [10 января](https://dev.wildberries.ru/release-notes?id=597).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v2-adverts
 pub async fn get_v2_adverts(
     configuration: &configuration::Configuration,
     ids: Option<&str>,
@@ -1476,6 +1486,74 @@ pub async fn get_v2_adverts(
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
         let local_var_entity: Option<GetV2AdvertsError> =
+            serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent {
+            status: local_var_status,
+            content: local_var_content,
+            entity: local_var_entity,
+        };
+        Err(Error::ResponseError(local_var_error))
+    }
+}
+
+/// Метод возвращает информацию о кампаниях с единой или ручной ставкой по их статусам, типам оплаты или списку ID.  Чтобы получить все кампании:   1. Сделайте первый запрос без параметра `next`.   2. Повторяйте запрос со значением параметра `next` из ответа на предыдущий запрос, пока `next` не вернётся пустым `\"\"`. Это будет означать, что вы получили все кампании.  Чтобы получить конкретные кампании, передайте их ID в параметре `advertIds`. Не передавайте `advertIds` в одном запросе с другими параметрами.  RL  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v3-adverts
+pub async fn get_v3_adverts(
+    configuration: &configuration::Configuration,
+    advert_ids: Option<&str>,
+    statuses: Option<&str>,
+    next: Option<&str>,
+    limit: Option<i64>,
+    payment_type: Option<&str>,
+) -> Result<models::V3GetAdvertsResponse, Error<GetV3AdvertsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!(
+        "{}/api/advert/v3/adverts",
+        local_var_configuration.base_path
+    );
+    let mut local_var_req_builder =
+        local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    if let Some(ref local_var_str) = advert_ids {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("advertIds", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = statuses {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("statuses", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = next {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("next", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = limit {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("limit", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = payment_type {
+        local_var_req_builder =
+            local_var_req_builder.query(&[("paymentType", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder =
+            local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
+    };
+
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetV3AdvertsError> =
             serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent {
             status: local_var_status,
@@ -1886,7 +1964,7 @@ pub async fn post_v0_normquery_stats(
     }
 }
 
-/// Метод меняет название [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts). Это можно сделать в любой момент существования кампании.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v0-rename
+/// Метод меняет название [кампании](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts). Это можно сделать в любой момент существования кампании.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Сервисный | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый с секретом | 1 сек | 5 запросов | 200 мс | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v0-rename
 pub async fn post_v0_rename(
     configuration: &configuration::Configuration,
     post_v0_rename_request: Option<models::PostV0RenameRequest>,
@@ -2200,7 +2278,7 @@ pub async fn post_v1_stats(
     }
 }
 
-/// Метод возвращает информацию об остатках бюджетов [кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts). Для кампаний в [статусах](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount): - `4` — готова к запуску - `9` — активна - `11` — на паузе  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 20 запросов | 3 сек | 4 запроса | | Сервисный | 1 мин | 20 запросов | 3 сек | 4 запроса | | Базовый с секретом | 1 мин | 20 запросов | 3 сек | 4 запроса | | Базовый | 1 ч | 4 запроса | 15 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-api-advert-v2-budget
+/// Метод возвращает информацию об остатках бюджетов [кампаний](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts). Для кампаний в [статусах](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV1PromotionCount): - `4` — готова к запуску - `9` — активна - `11` — на паузе  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 20 запросов | 3 сек | 4 запроса | | Сервисный | 1 мин | 20 запросов | 3 сек | 4 запроса | | Базовый с секретом | 1 мин | 20 запросов | 3 сек | 4 запроса | | Базовый | 1 ч | 4 запроса | 15 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-api-advert-v2-budget
 pub async fn post_v2_budget(
     configuration: &configuration::Configuration,
     v2_budget_request: models::V2BudgetRequest,
@@ -2287,7 +2365,7 @@ pub async fn post_v2_seacat_save_ad(
     }
 }
 
-/// Метод возвращает список [карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), которые можно добавить в рекламную [кампанию](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV2Adverts). Для получения карточек необходимы ID [предметов](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/getV1SupplierSubjects), также доступных для добавления в кампанию.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 5 запросов | 12 сек | 5 запросов | | Сервисный | 1 мин | 5 запросов | 12 сек | 5 запросов | | Базовый с секретом | 1 мин | 5 запросов | 12 сек | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v2-supplier-nms
+/// Метод возвращает список [карточек товаров](https://dev.wildberries.ru/openapi/item-management#tag/listings/operation/postV2GetCardsList), которые можно добавить в рекламную [кампанию](https://dev.wildberries.ru/openapi/promotion#tag/campaigns/operation/getV3Adverts). Для получения карточек необходимы ID [предметов](https://dev.wildberries.ru/openapi/promotion#tag/creatingCampaigns/operation/getV1SupplierSubjects), также доступных для добавления в кампанию.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 5 запросов | 12 сек | 5 запросов | | Сервисный | 1 мин | 5 запросов | 12 сек | 5 запросов | | Базовый с секретом | 1 мин | 5 запросов | 12 сек | 5 запросов | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/post-adv-v2-supplier-nms
 pub async fn post_v2_supplier_nms(
     configuration: &configuration::Configuration,
     request_body: Option<Vec<i64>>,
