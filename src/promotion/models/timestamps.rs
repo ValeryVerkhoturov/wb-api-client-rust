@@ -28,6 +28,14 @@ pub struct Timestamps {
         skip_serializing_if = "Option::is_none"
     )]
     pub started: Option<Option<String>>,
+    /// Время завершения кампании
+    #[serde(
+        rename = "ended",
+        default,
+        with = "::serde_with::rust::double_option",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ended: Option<Option<String>>,
 }
 
 impl Timestamps {
@@ -37,6 +45,7 @@ impl Timestamps {
             created: None,
             updated: None,
             started: None,
+            ended: None,
         }
     }
 }

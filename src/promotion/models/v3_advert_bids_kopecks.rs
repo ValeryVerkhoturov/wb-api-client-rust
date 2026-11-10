@@ -13,19 +13,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct V3AdvertBidsKopecks {
-    /// Ставка в поиске
-    #[serde(rename = "search", skip_serializing_if = "Option::is_none")]
-    pub search: Option<i64>,
-    /// Ставка в рекомендациях
-    #[serde(rename = "recommendations", skip_serializing_if = "Option::is_none")]
-    pub recommendations: Option<i64>,
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<models::V3Placements>,
+    /// Ставка
+    #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
+    pub value: Option<i64>,
 }
 
 impl V3AdvertBidsKopecks {
     pub fn new() -> V3AdvertBidsKopecks {
         V3AdvertBidsKopecks {
-            search: None,
-            recommendations: None,
+            r#type: None,
+            value: None,
         }
     }
 }

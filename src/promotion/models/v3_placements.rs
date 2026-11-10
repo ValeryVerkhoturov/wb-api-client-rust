@@ -11,21 +11,30 @@
 use crate::promotion::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct V3Placements {
-    /// Размещение в поиске:   - `false` — выключено   - `true` — включено
-    #[serde(rename = "search", skip_serializing_if = "Option::is_none")]
-    pub search: Option<bool>,
-    /// Размещение в рекомендациях:   - `false` — выключено   - `true` — включено
-    #[serde(rename = "recommendations", skip_serializing_if = "Option::is_none")]
-    pub recommendations: Option<bool>,
+/// V3Placements : Место размещения кампании: - `search` - поиск - `recommendations` - рекомендации - `combined` - поиск и рекомендации с единой ставкой
+/// Место размещения кампании: - `search` - поиск - `recommendations` - рекомендации - `combined` - поиск и рекомендации с единой ставкой
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum V3Placements {
+    #[serde(rename = "search")]
+    Search,
+    #[serde(rename = "recommendations")]
+    Recommendations,
+    #[serde(rename = "combined")]
+    Combined,
 }
 
-impl V3Placements {
-    pub fn new() -> V3Placements {
-        V3Placements {
-            search: None,
-            recommendations: None,
+impl std::fmt::Display for V3Placements {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Self::Search => write!(f, "search"),
+            Self::Recommendations => write!(f, "recommendations"),
+            Self::Combined => write!(f, "combined"),
         }
+    }
+}
+
+impl Default for V3Placements {
+    fn default() -> V3Placements {
+        Self::Search
     }
 }

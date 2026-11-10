@@ -18,8 +18,9 @@ pub struct V3AdvertNmsSettings {
     pub nm_id: Option<i64>,
     #[serde(rename = "subject", skip_serializing_if = "Option::is_none")]
     pub subject: Option<Box<models::V3AdvertSubject>>,
+    /// Ставки
     #[serde(rename = "bids", skip_serializing_if = "Option::is_none")]
-    pub bids: Option<Box<models::V3AdvertBidsKopecks>>,
+    pub bids: Option<Vec<models::V3AdvertBidsKopecks>>,
 }
 
 impl V3AdvertNmsSettings {

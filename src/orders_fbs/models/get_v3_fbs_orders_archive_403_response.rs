@@ -11,15 +11,49 @@
 use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetV3FbsOrdersArchive403Response {
-    ArhiveOrderError400(Box<models::ArhiveOrderError400>),
-    Response4Xx(Box<models::Response4Xx>),
+#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
+pub struct GetV3FbsOrdersArchive403Response {
+    /// Внутренний код ошибки
+    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
+    pub code: Option<String>,
+    /// Детали ошибки
+    #[serde(rename = "detail", skip_serializing_if = "Option::is_none")]
+    pub detail: Option<String>,
+    /// Информация об ошибке
+    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
+    pub errors: Option<Vec<models::ArhiveOrderError400ErrorsInner>>,
+    /// ID внутреннего сервиса WB
+    #[serde(rename = "origin", skip_serializing_if = "Option::is_none")]
+    pub origin: Option<String>,
+    /// ID запроса
+    #[serde(rename = "requestId", skip_serializing_if = "Option::is_none")]
+    pub request_id: Option<String>,
+    /// HTTP статус-код
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<f64>,
+    /// Заголовок ошибки
+    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    /// Расшифровка HTTP статус-кода
+    #[serde(rename = "statusText", skip_serializing_if = "Option::is_none")]
+    pub status_text: Option<String>,
+    /// Дата и время запроса
+    #[serde(rename = "timestamp", skip_serializing_if = "Option::is_none")]
+    pub timestamp: Option<String>,
 }
 
-impl Default for GetV3FbsOrdersArchive403Response {
-    fn default() -> Self {
-        Self::ArhiveOrderError400(Default::default())
+impl GetV3FbsOrdersArchive403Response {
+    pub fn new() -> GetV3FbsOrdersArchive403Response {
+        GetV3FbsOrdersArchive403Response {
+            code: None,
+            detail: None,
+            errors: None,
+            origin: None,
+            request_id: None,
+            status: None,
+            title: None,
+            status_text: None,
+            timestamp: None,
+        }
     }
 }

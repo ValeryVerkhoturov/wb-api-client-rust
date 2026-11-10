@@ -38,7 +38,7 @@ pub struct GetAdvertsAdvertsInner {
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
     #[serde(rename = "timestamps", skip_serializing_if = "Option::is_none")]
-    pub timestamps: Option<Box<models::Timestamps>>,
+    pub timestamps: Option<Box<models::TimestampsV2>>,
 }
 
 impl GetAdvertsAdvertsInner {

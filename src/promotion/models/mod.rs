@@ -208,6 +208,8 @@ pub mod stats_blok2_daily_stats_inner_app_type_stats_inner_stats_inner;
 pub use self::stats_blok2_daily_stats_inner_app_type_stats_inner_stats_inner::StatsBlok2DailyStatsInnerAppTypeStatsInnerStatsInner;
 pub mod timestamps;
 pub use self::timestamps::Timestamps;
+pub mod timestamps_v2;
+pub use self::timestamps_v2::TimestampsV2;
 pub mod v0_bid_recommendation_base;
 pub use self::v0_bid_recommendation_base::V0BidRecommendationBase;
 pub mod v0_bid_recommendation_base_bid;

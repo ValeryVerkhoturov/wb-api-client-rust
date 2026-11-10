@@ -21,7 +21,7 @@ pub struct V3AdvertSettings {
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde(rename = "placements", skip_serializing_if = "Option::is_none")]
-    pub placements: Option<Box<models::V3Placements>>,
+    pub placements: Option<Vec<models::V3Placements>>,
 }
 
 impl V3AdvertSettings {

@@ -14,8 +14,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct V3GetAdverts {
     /// ID кампании
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i64>,
+    #[serde(rename = "advertId", skip_serializing_if = "Option::is_none")]
+    pub advert_id: Option<i64>,
     /// Статус кампании: - `4` — готова к запуску - `7` — завершена - `9` — активна - `11` — на паузе
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
@@ -36,7 +36,7 @@ pub struct V3GetAdverts {
 impl V3GetAdverts {
     pub fn new() -> V3GetAdverts {
         V3GetAdverts {
-            id: None,
+            advert_id: None,
             status: None,
             timestamps: None,
             settings: None,

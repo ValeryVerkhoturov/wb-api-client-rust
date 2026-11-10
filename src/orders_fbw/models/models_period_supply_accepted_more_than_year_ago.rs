@@ -14,36 +14,30 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ModelsPeriodSupplyAcceptedMoreThanYearAgo {
     /// HTTP-статус код
-    #[serde(rename = "status")]
-    pub status: i64,
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<i64>,
     /// Краткое описание ошибки
-    #[serde(rename = "title")]
-    pub title: String,
+    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
     /// Подробное описание ошибки
-    #[serde(rename = "detail")]
-    pub detail: String,
+    #[serde(rename = "detail", skip_serializing_if = "Option::is_none")]
+    pub detail: Option<String>,
     /// ID запроса
-    #[serde(rename = "requestId")]
-    pub request_id: String,
+    #[serde(rename = "requestId", skip_serializing_if = "Option::is_none")]
+    pub request_id: Option<String>,
     /// Сервис, в котором произошла ошибка
-    #[serde(rename = "origin")]
-    pub origin: String,
+    #[serde(rename = "origin", skip_serializing_if = "Option::is_none")]
+    pub origin: Option<String>,
 }
 
 impl ModelsPeriodSupplyAcceptedMoreThanYearAgo {
-    pub fn new(
-        status: i64,
-        title: String,
-        detail: String,
-        request_id: String,
-        origin: String,
-    ) -> ModelsPeriodSupplyAcceptedMoreThanYearAgo {
+    pub fn new() -> ModelsPeriodSupplyAcceptedMoreThanYearAgo {
         ModelsPeriodSupplyAcceptedMoreThanYearAgo {
-            status,
-            title,
-            detail,
-            request_id,
-            origin,
+            status: None,
+            title: None,
+            detail: None,
+            request_id: None,
+            origin: None,
         }
     }
 }
