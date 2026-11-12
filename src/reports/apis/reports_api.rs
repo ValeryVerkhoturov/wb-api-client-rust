@@ -121,17 +121,6 @@ pub enum GetV1AnalyticsGoodsLabelingError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_v1_analytics_region_sale`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GetV1AnalyticsRegionSaleError {
-    Status400(models::Http4XxResponse),
-    Status401(models::GetV1SupplierOrders401Response),
-    Status403(models::GetV1SupplierOrders403Response),
-    Status429(models::GetV1SupplierOrders401Response),
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`get_v1_deductions`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -722,53 +711,6 @@ pub async fn get_v1_analytics_goods_labeling(
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
         let local_var_entity: Option<GetV1AnalyticsGoodsLabelingError> =
-            serde_json::from_str(&local_var_content).ok();
-        let local_var_error = ResponseContent {
-            status: local_var_status,
-            content: local_var_content,
-            entity: local_var_entity,
-        };
-        Err(Error::ResponseError(local_var_error))
-    }
-}
-
-/// Метод будет отключен [3 ноября](https://dev.wildberries.ru/release-notes?id=590).  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 10 сек | 1 запрос | 10 сек | 5 запросов | | Сервисный | 10 сек | 1 запрос | 10 сек | 5 запросов | | Базовый с секретом | 10 сек | 1 запрос | 10 сек | 5 запросов | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/reports/get-api-v1-analytics-region-sale
-pub async fn get_v1_analytics_region_sale(
-    configuration: &configuration::Configuration,
-    date_from: &str,
-    date_to: &str,
-) -> Result<models::GetV1AnalyticsRegionSale200Response, Error<GetV1AnalyticsRegionSaleError>> {
-    let local_var_configuration = configuration;
-
-    let local_var_client = &local_var_configuration.client;
-
-    let local_var_uri_str = format!(
-        "{}/api/v1/analytics/region-sale",
-        local_var_configuration.base_path
-    );
-    let mut local_var_req_builder =
-        local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
-
-    local_var_req_builder = local_var_req_builder.query(&[("dateFrom", &date_from.to_string())]);
-    local_var_req_builder = local_var_req_builder.query(&[("dateTo", &date_to.to_string())]);
-    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
-        local_var_req_builder =
-            local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
-    }
-    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
-        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
-    };
-
-    let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
-
-    let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
-
-    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
-        serde_json::from_str(&local_var_content).map_err(Error::from)
-    } else {
-        let local_var_entity: Option<GetV1AnalyticsRegionSaleError> =
             serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent {
             status: local_var_status,

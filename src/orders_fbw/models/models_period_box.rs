@@ -13,9 +13,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ModelsPeriodBox {
-    /// Штрих-код упаковки
+    /// Закодированное значение стикера упаковки
     #[serde(rename = "packageCode", skip_serializing_if = "Option::is_none")]
     pub package_code: Option<String>,
+    /// ID стикера упаковки
+    #[serde(rename = "packageId", skip_serializing_if = "Option::is_none")]
+    pub package_id: Option<String>,
     /// Суммарное количество товара в упаковке, шт
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<i64>,
@@ -28,6 +31,7 @@ impl ModelsPeriodBox {
     pub fn new() -> ModelsPeriodBox {
         ModelsPeriodBox {
             package_code: None,
+            package_id: None,
             quantity: None,
             barcodes: None,
         }
