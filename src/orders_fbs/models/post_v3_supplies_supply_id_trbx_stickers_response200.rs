@@ -13,8 +13,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostV3SuppliesSupplyIdTrbxStickersResponse200 {
-    #[serde(rename = "stickers", skip_serializing_if = "Option::is_none")]
-    pub stickers: Option<Vec<models::TrbxStickers>>,
+    #[serde(
+        rename = "stickers",
+        default,
+        with = "::serde_with::rust::double_option",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub stickers: Option<Option<Vec<models::TrbxStickers>>>,
 }
 
 impl PostV3SuppliesSupplyIdTrbxStickersResponse200 {
