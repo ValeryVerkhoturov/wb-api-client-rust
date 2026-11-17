@@ -16,10 +16,10 @@ pub struct FullStatsItemDaysInner {
     /// Блок информации о платформе
     #[serde(rename = "apps", skip_serializing_if = "Option::is_none")]
     pub apps: Option<Vec<models::FullStatsItemDaysInnerAppsInner>>,
-    /// Количество добавлений товаров в корзину
+    /// Сколько раз товар добавили в корзину
     #[serde(rename = "atbs", skip_serializing_if = "Option::is_none")]
     pub atbs: Option<i64>,
-    /// Отмены, шт.
+    /// Количество отмен
     #[serde(rename = "canceled", skip_serializing_if = "Option::is_none")]
     pub canceled: Option<i64>,
     /// Дата, за которую представлены данные
@@ -34,7 +34,7 @@ pub struct FullStatsItemDaysInner {
     /// CR (conversion rate) — отношение количества заказов к общему количеству посещений кампании
     #[serde(rename = "cr", skip_serializing_if = "Option::is_none")]
     pub cr: Option<f64>,
-    /// CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+    /// Кликабельность — отношение числа кликов к количеству показов, %
     #[serde(rename = "ctr", skip_serializing_if = "Option::is_none")]
     pub ctr: Option<f64>,
     /// Количество заказов

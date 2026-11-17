@@ -17,13 +17,13 @@ pub struct FullStatsItem {
     /// ID кампании
     #[serde(rename = "advertId", skip_serializing_if = "Option::is_none")]
     pub advert_id: Option<i64>,
-    /// Количество добавлений товаров в корзину
+    /// Сколько раз товар добавили в корзину
     #[serde(rename = "atbs", skip_serializing_if = "Option::is_none")]
     pub atbs: Option<i64>,
     /// Статистика по средней позиции товара (для кампаний с единой ставкой)
     #[serde(rename = "boosterStats", skip_serializing_if = "Option::is_none")]
     pub booster_stats: Option<Vec<models::FullStatsItemBoosterStatsInner>>,
-    /// Отмены, шт.
+    /// Количество отмен
     #[serde(rename = "canceled", skip_serializing_if = "Option::is_none")]
     pub canceled: Option<i64>,
     /// Количество кликов
@@ -32,10 +32,10 @@ pub struct FullStatsItem {
     /// Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
     #[serde(rename = "cpc", skip_serializing_if = "Option::is_none")]
     pub cpc: Option<f64>,
-    /// CR (conversion rate) — отношение количества заказов к общему количеству кликов
+    /// Отношение количества заказов к общему количеству кликов
     #[serde(rename = "cr", skip_serializing_if = "Option::is_none")]
     pub cr: Option<f64>,
-    /// CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+    /// Кликабельность — отношение числа кликов к количеству показов, %
     #[serde(rename = "ctr", skip_serializing_if = "Option::is_none")]
     pub ctr: Option<f64>,
     /// Статистка по дням

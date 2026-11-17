@@ -19,7 +19,7 @@ pub struct StatsBlok1DailyStatsInnerAppTypeStatsInnerStatsInner {
     /// Количество кликов
     #[serde(rename = "clicks", skip_serializing_if = "Option::is_none")]
     pub clicks: Option<i64>,
-    /// Количество добавлений товаров в корзину
+    /// Сколько раз товар добавили в корзину
     #[serde(rename = "atbs", skip_serializing_if = "Option::is_none")]
     pub atbs: Option<i64>,
     /// CTR (click-through rate) — показатель кликабельности, отношение числа кликов к количеству показов в рамках медиакампании

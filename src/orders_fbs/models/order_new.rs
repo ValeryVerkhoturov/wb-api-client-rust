@@ -23,7 +23,7 @@ pub struct OrderNew {
     /// Планируемая дата доставки заказа покупателю. Поле отображается для сборочных заданий со сверхгабаритными товарами `СГТ`, `cargoType: 2`
     #[serde(rename = "ddate", skip_serializing_if = "Option::is_none")]
     pub ddate: Option<String>,
-    /// Рекомендуемая дата доставки СГТ в сортировочный центр или на склад. Поле отображается для сборочных заданий со сверхгабаритными товарами `СГТ`, `cargoType: 2`
+    /// Дата, когда [нужно отгрузить](https://seller.wildberries.ru/instructions/ru/ru/material/packing-and-delivery-of-oversized-items-in-fbs) сверхгабаритный товар (СГТ) на склад. Часовой пояс — UTC+3. Поле отображается для сборочных заданий со сверхгабаритными товарами `СГТ`, `cargoType: 2`
     #[serde(
         rename = "sellerDate",
         default,

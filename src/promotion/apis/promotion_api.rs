@@ -69,6 +69,17 @@ pub enum GetV0PauseError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`get_v0_positions`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetV0PositionsError {
+    Status400(models::StandardizedBatchError),
+    Status401(models::GetV1PromotionCount401Response),
+    Status403(models::GetV1PromotionCount403Response),
+    Status429(models::GetV1PromotionCount401Response),
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`get_v0_start`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -262,6 +273,17 @@ pub enum GetV3AdvertsError {
 #[serde(untagged)]
 pub enum GetV3FullstatsError {
     Status400(models::FullStatsError),
+    Status401(models::GetV1PromotionCount401Response),
+    Status403(models::GetV1PromotionCount403Response),
+    Status429(models::GetV1PromotionCount401Response),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`get_v4_fullstats`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetV4FullstatsError {
+    Status400(models::StandardizedBatchError),
     Status401(models::GetV1PromotionCount401Response),
     Status403(models::GetV1PromotionCount403Response),
     Status429(models::GetV1PromotionCount401Response),
@@ -702,6 +724,91 @@ pub async fn get_v0_pause(
         Ok(())
     } else {
         let local_var_entity: Option<GetV0PauseError> =
+            serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent {
+            status: local_var_status,
+            content: local_var_content,
+            entity: local_var_entity,
+        };
+        Err(Error::ResponseError(local_var_error))
+    }
+}
+
+/// Метод возвращает медианные позиции карточек товаров в поисковой выдаче и распределение показов по фиксированным диапазонам позиций.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 10 запросов | 6 сек | 1 запрос | | Сервисный | 1 мин | 10 запросов | 6 сек | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v0-positions
+pub async fn get_v0_positions(
+    configuration: &configuration::Configuration,
+    advert_ids: Vec<i64>,
+    begin_date: &str,
+    end_date: &str,
+    nm_ids: Option<Vec<i64>>,
+) -> Result<models::V0PositionsResponse, Error<GetV0PositionsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!(
+        "{}/api/advert/v0/positions",
+        local_var_configuration.base_path
+    );
+    let mut local_var_req_builder =
+        local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    local_var_req_builder = match "csv" {
+        "multi" => local_var_req_builder.query(
+            &advert_ids
+                .into_iter()
+                .map(|p| ("advertIds".to_owned(), p.to_string()))
+                .collect::<Vec<(std::string::String, std::string::String)>>(),
+        ),
+        _ => local_var_req_builder.query(&[(
+            "advertIds",
+            &advert_ids
+                .into_iter()
+                .map(|p| p.to_string())
+                .collect::<Vec<String>>()
+                .join(",")
+                .to_string(),
+        )]),
+    };
+    if let Some(ref local_var_str) = nm_ids {
+        local_var_req_builder = match "csv" {
+            "multi" => local_var_req_builder.query(
+                &local_var_str
+                    .into_iter()
+                    .map(|p| ("nmIds".to_owned(), p.to_string()))
+                    .collect::<Vec<(std::string::String, std::string::String)>>(),
+            ),
+            _ => local_var_req_builder.query(&[(
+                "nmIds",
+                &local_var_str
+                    .into_iter()
+                    .map(|p| p.to_string())
+                    .collect::<Vec<String>>()
+                    .join(",")
+                    .to_string(),
+            )]),
+        };
+    }
+    local_var_req_builder = local_var_req_builder.query(&[("beginDate", &begin_date.to_string())]);
+    local_var_req_builder = local_var_req_builder.query(&[("endDate", &end_date.to_string())]);
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder =
+            local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
+    };
+
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetV0PositionsError> =
             serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent {
             status: local_var_status,
@@ -1600,6 +1707,71 @@ pub async fn get_v3_fullstats(
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
         let local_var_entity: Option<GetV3FullstatsError> =
+            serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent {
+            status: local_var_status,
+            content: local_var_content,
+            entity: local_var_entity,
+        };
+        Err(Error::ResponseError(local_var_error))
+    }
+}
+
+/// Метод формирует статистику кампаний в плоском формате (без вложенной иерархии) с разделением по зонам показов и типам конверсии.  Максимальный период в запросе — 31 день.  Для кампаний в статусах `7`, `9` и `11`.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 3 запроса | 20 сек | 1 запрос | | Сервисный | 1 мин | 3 запроса | 20 сек | 1 запрос | | Базовый с секретом | 1 мин | 3 запроса | 20 сек | 1 запрос | | Базовый | 1 ч | 1 запрос | 1 ч | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/promotion/get-api-advert-v4-fullstats
+pub async fn get_v4_fullstats(
+    configuration: &configuration::Configuration,
+    advert_ids: Vec<i64>,
+    begin_date: &str,
+    end_date: &str,
+) -> Result<models::V4FullStatsResponse, Error<GetV4FullstatsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!(
+        "{}/api/advert/v4/fullstats",
+        local_var_configuration.base_path
+    );
+    let mut local_var_req_builder =
+        local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    local_var_req_builder = match "csv" {
+        "multi" => local_var_req_builder.query(
+            &advert_ids
+                .into_iter()
+                .map(|p| ("advertIds".to_owned(), p.to_string()))
+                .collect::<Vec<(std::string::String, std::string::String)>>(),
+        ),
+        _ => local_var_req_builder.query(&[(
+            "advertIds",
+            &advert_ids
+                .into_iter()
+                .map(|p| p.to_string())
+                .collect::<Vec<String>>()
+                .join(",")
+                .to_string(),
+        )]),
+    };
+    local_var_req_builder = local_var_req_builder.query(&[("beginDate", &begin_date.to_string())]);
+    local_var_req_builder = local_var_req_builder.query(&[("endDate", &end_date.to_string())]);
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder =
+            local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
+    };
+
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetV4FullstatsError> =
             serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent {
             status: local_var_status,

@@ -16,10 +16,10 @@ pub struct FullStatsItemDaysInnerAppsInner {
     /// Тип платформы:   - `1` — сайт   - `32` — Android   - `64` — IOS
     #[serde(rename = "appType", skip_serializing_if = "Option::is_none")]
     pub app_type: Option<AppType>,
-    /// Количество добавлений товаров в корзину
+    /// Сколько раз товар добавили в корзину
     #[serde(rename = "atbs", skip_serializing_if = "Option::is_none")]
     pub atbs: Option<i64>,
-    /// Отмены, шт.
+    /// Количество отмен
     #[serde(rename = "canceled", skip_serializing_if = "Option::is_none")]
     pub canceled: Option<i64>,
     /// Количество кликов
@@ -28,10 +28,10 @@ pub struct FullStatsItemDaysInnerAppsInner {
     /// Средняя стоимость клика в базовых единицах валюты [профиля продавца](https://cmp.wildberries.ru/campaigns/finances)
     #[serde(rename = "cpc", skip_serializing_if = "Option::is_none")]
     pub cpc: Option<f64>,
-    /// CR (conversion rate) — отношение количества заказов к общему количеству кликов
+    /// Отношение количества заказов к общему количеству кликов
     #[serde(rename = "cr", skip_serializing_if = "Option::is_none")]
     pub cr: Option<f64>,
-    /// CTR (click-through rate) — отношение числа кликов к количеству показов в процентах
+    /// Кликабельность — отношение числа кликов к количеству показов, %
     #[serde(rename = "ctr", skip_serializing_if = "Option::is_none")]
     pub ctr: Option<f64>,
     /// Блок статистики по артикулам WB

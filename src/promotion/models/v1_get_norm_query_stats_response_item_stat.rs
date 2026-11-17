@@ -27,13 +27,13 @@ pub struct V1GetNormQueryStatsResponseItemStat {
     /// Количество кликов
     #[serde(rename = "clicks", skip_serializing_if = "Option::is_none")]
     pub clicks: Option<i64>,
-    /// Количество добавлений товаров в корзину
+    /// Сколько раз товар добавили в корзину
     #[serde(rename = "atbs", skip_serializing_if = "Option::is_none")]
     pub atbs: Option<i64>,
     /// Количество заказов
     #[serde(rename = "orders", skip_serializing_if = "Option::is_none")]
     pub orders: Option<i64>,
-    /// CTR (click-through rate) — отношение числа кликов к количеству показов в процентах.  Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
+    /// Кликабельность — отношение числа кликов к количеству показов, %.  Для кампаний с типом оплаты `cpc` — за клики — значение будет `null`
     #[serde(
         rename = "ctr",
         default,
