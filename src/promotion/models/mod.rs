@@ -44,8 +44,6 @@ pub mod get_v1_balance_response200;
 pub use self::get_v1_balance_response200::GetV1BalanceResponse200;
 pub mod get_v1_balance_response200_cashbacks_inner;
 pub use self::get_v1_balance_response200_cashbacks_inner::GetV1BalanceResponse200CashbacksInner;
-pub mod get_v1_budget_response200;
-pub use self::get_v1_budget_response200::GetV1BudgetResponse200;
 pub mod get_v1_calendar_promotions_200_response;
 pub use self::get_v1_calendar_promotions_200_response::GetV1CalendarPromotions200Response;
 pub mod get_v1_calendar_promotions_200_response_data;

@@ -109,7 +109,7 @@ pub struct Supply {
         skip_serializing_if = "Option::is_none"
     )]
     pub waybill_uuid: Option<Option<String>>,
-    /// Доступен ли СПОТ для этой поставки:   - `true` — да. Используйте метод [получения данных СПОТ](./orders-fbs#tag/fbsSupplies/operation/postV3FbsSuppliesSpotList)   - `false` — нет
+    /// Доступен ли СПОТ для этой поставки:   - `true` — да   - `false` — нет
     #[serde(rename = "spotAvailable", skip_serializing_if = "Option::is_none")]
     pub spot_available: Option<bool>,
 }
