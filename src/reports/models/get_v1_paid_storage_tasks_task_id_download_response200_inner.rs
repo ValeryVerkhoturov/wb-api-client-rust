@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetV1PaidStorageTasksTaskIdDownloadResponse200Inner {
-    /// Дата, за которую был расчёт или перерасчёт
+    /// Дата расчёта или перерасчёта
     #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
     /// Коэффициент логистики и хранения. [На данный момент](https://dev.wildberries.ru/release-notes?id=570) может быть только `0`

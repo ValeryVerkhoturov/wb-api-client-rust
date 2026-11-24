@@ -34,7 +34,7 @@ pub struct TableItem {
     /// Находится ли товар в продвижении в Поисковой выдаче
     #[serde(rename = "isAdvertised", skip_serializing_if = "Option::is_none")]
     pub is_advertised: Option<bool>,
-    /// Искали ли товар по подменному артикулу. Поле будет в ответе при наличии в запросе `includeSubstitutedSKUs` и/или `includeSearchTexts`
+    /// Искали ли товар по подменному артикулу
     #[serde(rename = "isSubstitutedSKU", skip_serializing_if = "Option::is_none")]
     pub is_substituted_sku: Option<bool>,
     /// Есть ли рейтинг у карточки товара

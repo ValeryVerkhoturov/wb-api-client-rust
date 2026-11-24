@@ -14,38 +14,46 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetV1AnalyticsGoodsLabeling200ResponseReportInner {
     /// Сумма штрафа, руб
-    #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
-    pub amount: Option<f64>,
+    #[serde(rename = "amount")]
+    pub amount: f64,
     /// Дата
-    #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
-    pub date: Option<String>,
+    #[serde(rename = "date")]
+    pub date: String,
     /// Номер поставки
-    #[serde(rename = "incomeId", skip_serializing_if = "Option::is_none")]
-    pub income_id: Option<i64>,
+    #[serde(rename = "incomeId")]
+    pub income_id: i64,
     /// Артикул WB
-    #[serde(rename = "nmID", skip_serializing_if = "Option::is_none")]
-    pub nm_id: Option<i64>,
+    #[serde(rename = "nmID")]
+    pub nm_id: i64,
     /// URL фото товара
-    #[serde(rename = "photoUrls", skip_serializing_if = "Option::is_none")]
-    pub photo_urls: Option<Vec<String>>,
+    #[serde(rename = "photoUrls")]
+    pub photo_urls: Vec<String>,
     /// Штрихкод
-    #[serde(rename = "shkID", skip_serializing_if = "Option::is_none")]
-    pub shk_id: Option<i64>,
+    #[serde(rename = "shkID")]
+    pub shk_id: i64,
     /// Баркод из карточки товара
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
+    #[serde(rename = "sku")]
+    pub sku: String,
 }
 
 impl GetV1AnalyticsGoodsLabeling200ResponseReportInner {
-    pub fn new() -> GetV1AnalyticsGoodsLabeling200ResponseReportInner {
+    pub fn new(
+        amount: f64,
+        date: String,
+        income_id: i64,
+        nm_id: i64,
+        photo_urls: Vec<String>,
+        shk_id: i64,
+        sku: String,
+    ) -> GetV1AnalyticsGoodsLabeling200ResponseReportInner {
         GetV1AnalyticsGoodsLabeling200ResponseReportInner {
-            amount: None,
-            date: None,
-            income_id: None,
-            nm_id: None,
-            photo_urls: None,
-            shk_id: None,
-            sku: None,
+            amount,
+            date,
+            income_id,
+            nm_id,
+            photo_urls,
+            shk_id,
+            sku,
         }
     }
 }

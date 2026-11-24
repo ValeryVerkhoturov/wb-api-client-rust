@@ -37,7 +37,7 @@ pub struct DbsOnlyClientInfo {
     /// ID сборочного задания
     #[serde(rename = "orderID", skip_serializing_if = "Option::is_none")]
     pub order_id: Option<i64>,
-    /// Добавочный код. Пустое значение `\"\"` указывает, что код ещё не назначен
+    /// Добавочный код. Значение `0` указывает, что код ещё не назначен
     #[serde(rename = "phoneCode", skip_serializing_if = "Option::is_none")]
     pub phone_code: Option<i64>,
     /// Дополнительные добавочные коды. Используйте, если не получилось дозвониться по добавочному коду из `phoneCode`. Пустое значение `\"\"` указывает, что код ещё не назначен
