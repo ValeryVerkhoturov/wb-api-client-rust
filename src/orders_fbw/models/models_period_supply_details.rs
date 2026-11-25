@@ -163,6 +163,9 @@ pub struct ModelsPeriodSupplyDetails {
     /// Тип поставки — **Поштучная палета**:   - `true` — да   - `false` — нет    Поле возвращается только при `\"boxTypeID\": 2`
     #[serde(rename = "isBoxOnPallet", skip_serializing_if = "Option::is_none")]
     pub is_box_on_pallet: Option<bool>,
+    /// Количество товаров по Акту корректировки, которое не входит в `acceptedQuantity`. Возвращается, если есть расхождения, зафиксированные при приёмке поставки
+    #[serde(rename = "correctedQuantity", skip_serializing_if = "Option::is_none")]
+    pub corrected_quantity: Option<i64>,
 }
 
 impl ModelsPeriodSupplyDetails {
@@ -195,6 +198,7 @@ impl ModelsPeriodSupplyDetails {
             depersonalized_quantity: None,
             discrepancies: None,
             is_box_on_pallet: None,
+            corrected_quantity: None,
         }
     }
 }

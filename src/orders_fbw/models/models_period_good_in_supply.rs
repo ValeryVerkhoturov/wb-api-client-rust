@@ -79,6 +79,9 @@ pub struct ModelsPeriodGoodInSupply {
         skip_serializing_if = "Option::is_none"
     )]
     pub unloading_quantity: Option<Option<i64>>,
+    /// Количество товара по Акту корректировки, которое не входит в `acceptedQuantity`. Возвращается, если по товару есть расхождения, зафиксированные при приёмке
+    #[serde(rename = "correctedQuantity", skip_serializing_if = "Option::is_none")]
+    pub corrected_quantity: Option<i64>,
 }
 
 impl ModelsPeriodGoodInSupply {
@@ -96,6 +99,7 @@ impl ModelsPeriodGoodInSupply {
             ready_for_sale_quantity: None,
             accepted_quantity: None,
             unloading_quantity: None,
+            corrected_quantity: None,
         }
     }
 }
