@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostV2StocksReportOfficesResponse200 {
     #[serde(rename = "data", skip_serializing_if = "Option::is_none")]
-    pub data: Option<Box<models::TableShippingOfficeResponse>>,
+    pub data: Option<Box<models::TableDispatchOfficeResponse>>,
 }
 
 impl PostV2StocksReportOfficesResponse200 {

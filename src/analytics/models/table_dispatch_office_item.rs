@@ -11,25 +11,27 @@
 use crate::analytics::models;
 use serde::{Deserialize, Serialize};
 
+/// TableDispatchOfficeItem : Данные по региону отгрузки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct TableShippingOfficeItemOfficesInner {
-    /// [ID склада](https://dev.wildberries.ru/release-notes?id=605)
-    #[serde(rename = "officeID", skip_serializing_if = "Option::is_none")]
-    pub office_id: Option<i64>,
-    /// [Название склада](https://dev.wildberries.ru/release-notes?id=605)
-    #[serde(rename = "officeName", skip_serializing_if = "Option::is_none")]
-    pub office_name: Option<String>,
-    /// Метрики по складу
+pub struct TableDispatchOfficeItem {
+    /// [Страна отгрузки](https://dev.wildberries.ru/release-notes?id=605)
+    #[serde(rename = "regionName", skip_serializing_if = "Option::is_none")]
+    pub region_name: Option<String>,
+    /// Метрики по региону
     #[serde(rename = "metrics", skip_serializing_if = "Option::is_none")]
-    pub metrics: Option<Box<models::TableShippingOfficeMetrics>>,
+    pub metrics: Option<Box<models::TableDispatchOfficeMetrics>>,
+    /// [Данные по складам](https://dev.wildberries.ru/release-notes?id=605)
+    #[serde(rename = "offices", skip_serializing_if = "Option::is_none")]
+    pub offices: Option<Vec<models::TableDispatchOfficeItemOfficesInner>>,
 }
 
-impl TableShippingOfficeItemOfficesInner {
-    pub fn new() -> TableShippingOfficeItemOfficesInner {
-        TableShippingOfficeItemOfficesInner {
-            office_id: None,
-            office_name: None,
+impl TableDispatchOfficeItem {
+    /// Данные по региону отгрузки
+    pub fn new() -> TableDispatchOfficeItem {
+        TableDispatchOfficeItem {
+            region_name: None,
             metrics: None,
+            offices: None,
         }
     }
 }

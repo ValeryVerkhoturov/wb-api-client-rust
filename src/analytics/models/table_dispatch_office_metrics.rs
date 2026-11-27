@@ -11,9 +11,9 @@
 use crate::analytics::models;
 use serde::{Deserialize, Serialize};
 
-/// TableShippingOfficeMetrics : Общие метрики по регионам/складам отгрузки
+/// TableDispatchOfficeMetrics : Общие метрики по регионам/складам отгрузки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct TableShippingOfficeMetrics {
+pub struct TableDispatchOfficeMetrics {
     /// Остатки на текущий день, шт.
     #[serde(rename = "stockCount", skip_serializing_if = "Option::is_none")]
     pub stock_count: Option<i64>,
@@ -30,10 +30,10 @@ pub struct TableShippingOfficeMetrics {
     pub from_client_count: Option<i64>,
 }
 
-impl TableShippingOfficeMetrics {
+impl TableDispatchOfficeMetrics {
     /// Общие метрики по регионам/складам отгрузки
-    pub fn new() -> TableShippingOfficeMetrics {
-        TableShippingOfficeMetrics {
+    pub fn new() -> TableDispatchOfficeMetrics {
+        TableDispatchOfficeMetrics {
             stock_count: None,
             stock_sum: None,
             sale_rate: None,

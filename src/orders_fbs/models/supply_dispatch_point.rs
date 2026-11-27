@@ -11,9 +11,9 @@
 use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
-/// SupplyShippingPoint : Данные пункта отгрузки
+/// SupplyDispatchPoint : Данные пункта отгрузки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SupplyShippingPoint {
+pub struct SupplyDispatchPoint {
     /// ID пункта отгрузки
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<i64>,
@@ -43,10 +43,10 @@ pub struct SupplyShippingPoint {
     pub available: Option<bool>,
 }
 
-impl SupplyShippingPoint {
+impl SupplyDispatchPoint {
     /// Данные пункта отгрузки
-    pub fn new() -> SupplyShippingPoint {
-        SupplyShippingPoint {
+    pub fn new() -> SupplyDispatchPoint {
+        SupplyDispatchPoint {
             id: None,
             name: None,
             address: None,

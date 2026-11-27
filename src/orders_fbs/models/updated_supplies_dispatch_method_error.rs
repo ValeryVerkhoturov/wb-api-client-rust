@@ -11,9 +11,9 @@
 use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
-/// UpdatedSuppliesShippingMethodError : Ошибка обработки запроса для поставки. Возможные варианты ошибок:   - `400 IncorrectRequestBody`:     - некорректный ID поставки     - место отгрузки не найдено     - склад назначения находится не в РФ     - неизвестный `shippingType`     - дата не соответствует формату `YYYY-MM-DD`   - `400 FulfillmentRequired` — в месте отгрузки недоступна услуга **Фулфилмент в СЦ**   - `404 NotFound` — поставка не найдена   - `409 SupplyAlreadyScanned` — поставка или её короба уже отсканированы в пункте отгрузки   - `409 InvalidShippingDt` — некорректная дата отгрузки поставки
+/// UpdatedSuppliesDispatchMethodError : Ошибка обработки запроса для поставки. Возможные варианты ошибок:   - `400 IncorrectRequestBody`:     - некорректный ID поставки     - место отгрузки не найдено     - склад назначения находится не в РФ     - неизвестный `shippingType`     - дата не соответствует формату `YYYY-MM-DD`   - `400 FulfillmentRequired` — в месте отгрузки недоступна услуга **Фулфилмент в СЦ**   - `404 NotFound` — поставка не найдена   - `409 SupplyAlreadyScanned` — поставка или её короба уже отсканированы в пункте отгрузки   - `409 InvalidShippingDt` — некорректная дата отгрузки поставки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdatedSuppliesShippingMethodError {
+pub struct UpdatedSuppliesDispatchMethodError {
     /// Код ошибки
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<i64>,
@@ -22,10 +22,10 @@ pub struct UpdatedSuppliesShippingMethodError {
     pub detail: Option<String>,
 }
 
-impl UpdatedSuppliesShippingMethodError {
+impl UpdatedSuppliesDispatchMethodError {
     /// Ошибка обработки запроса для поставки. Возможные варианты ошибок:   - `400 IncorrectRequestBody`:     - некорректный ID поставки     - место отгрузки не найдено     - склад назначения находится не в РФ     - неизвестный `shippingType`     - дата не соответствует формату `YYYY-MM-DD`   - `400 FulfillmentRequired` — в месте отгрузки недоступна услуга **Фулфилмент в СЦ**   - `404 NotFound` — поставка не найдена   - `409 SupplyAlreadyScanned` — поставка или её короба уже отсканированы в пункте отгрузки   - `409 InvalidShippingDt` — некорректная дата отгрузки поставки
-    pub fn new() -> UpdatedSuppliesShippingMethodError {
-        UpdatedSuppliesShippingMethodError {
+    pub fn new() -> UpdatedSuppliesDispatchMethodError {
+        UpdatedSuppliesDispatchMethodError {
             code: None,
             detail: None,
         }

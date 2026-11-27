@@ -894,7 +894,7 @@ pub async fn get_v3_fbs_supplies_supply_id_shipping_points(
     city: &str,
     office_type: &str,
     shipping_dt: Option<&str>,
-) -> Result<models::SupplyShippingPointsResponse, Error<GetV3FbsSuppliesSupplyIdShippingPointsError>>
+) -> Result<models::SupplyDispatchPointsResponse, Error<GetV3FbsSuppliesSupplyIdShippingPointsError>>
 {
     let local_var_configuration = configuration;
 
@@ -1494,7 +1494,7 @@ pub async fn patch_v3_fbs_supplies_shipping_method(
     configuration: &configuration::Configuration,
     patch_v3_fbs_supplies_shipping_method_request: models::PatchV3FbsSuppliesShippingMethodRequest,
 ) -> Result<
-    models::UpdateSuppliesShippingMethodResponse,
+    models::UpdateSuppliesDispatchMethodResponse,
     Error<PatchV3FbsSuppliesShippingMethodError>,
 > {
     let local_var_configuration = configuration;

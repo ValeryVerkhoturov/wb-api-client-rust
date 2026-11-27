@@ -12,15 +12,15 @@ use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SupplyShippingPointsResponse {
+pub struct SupplyDispatchPointsResponse {
     /// Список пунктов отгрузки для указанной поставки
     #[serde(rename = "shippingPoints", skip_serializing_if = "Option::is_none")]
-    pub shipping_points: Option<Vec<models::SupplyShippingPoint>>,
+    pub shipping_points: Option<Vec<models::SupplyDispatchPoint>>,
 }
 
-impl SupplyShippingPointsResponse {
-    pub fn new() -> SupplyShippingPointsResponse {
-        SupplyShippingPointsResponse {
+impl SupplyDispatchPointsResponse {
+    pub fn new() -> SupplyDispatchPointsResponse {
+        SupplyDispatchPointsResponse {
             shipping_points: None,
         }
     }

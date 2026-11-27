@@ -12,13 +12,15 @@ use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdateSuppliesShippingMethodResponse {
-    #[serde(rename = "results", skip_serializing_if = "Option::is_none")]
-    pub results: Option<Vec<models::UpdatedSuppliesShippingMethod>>,
+pub struct UpdateSuppliesDispatchMethodRequest {
+    #[serde(rename = "data")]
+    pub data: Vec<models::UpdateSupplyShippingMethod>,
 }
 
-impl UpdateSuppliesShippingMethodResponse {
-    pub fn new() -> UpdateSuppliesShippingMethodResponse {
-        UpdateSuppliesShippingMethodResponse { results: None }
+impl UpdateSuppliesDispatchMethodRequest {
+    pub fn new(
+        data: Vec<models::UpdateSupplyShippingMethod>,
+    ) -> UpdateSuppliesDispatchMethodRequest {
+        UpdateSuppliesDispatchMethodRequest { data }
     }
 }

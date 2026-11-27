@@ -11,9 +11,8 @@
 use crate::analytics::models;
 use serde::{Deserialize, Serialize};
 
-/// CommonShippingOfficeFilters : Общие фильтры по регионам отгрузки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CommonShippingOfficeFilters {
+pub struct TableDispatchOfficeRequest {
     /// Список артикулов WB для фильтрации
     #[serde(rename = "nmIDs", skip_serializing_if = "Option::is_none")]
     pub nm_ids: Option<Vec<i64>>,
@@ -35,14 +34,13 @@ pub struct CommonShippingOfficeFilters {
     pub skip_deleted_nm: bool,
 }
 
-impl CommonShippingOfficeFilters {
-    /// Общие фильтры по регионам отгрузки
+impl TableDispatchOfficeRequest {
     pub fn new(
         current_period: models::PeriodInv,
         stock_type: models::StockType,
         skip_deleted_nm: bool,
-    ) -> CommonShippingOfficeFilters {
-        CommonShippingOfficeFilters {
+    ) -> TableDispatchOfficeRequest {
+        TableDispatchOfficeRequest {
             nm_ids: None,
             subject_ids: None,
             brand_names: None,

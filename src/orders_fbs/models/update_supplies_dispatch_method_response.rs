@@ -11,26 +11,14 @@
 use crate::orders_fbs::models;
 use serde::{Deserialize, Serialize};
 
-/// UpdatedSuppliesShippingMethod : Результат обработки запроса для одной поставки
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct UpdatedSuppliesShippingMethod {
-    #[serde(rename = "error", skip_serializing_if = "Option::is_none")]
-    pub error: Option<Box<models::UpdatedSuppliesShippingMethodError>>,
-    /// Успешна ли обработка запроса для данной поставки. Может быть только `true`
-    #[serde(rename = "success", skip_serializing_if = "Option::is_none")]
-    pub success: Option<bool>,
-    /// ID поставки
-    #[serde(rename = "supplyId", skip_serializing_if = "Option::is_none")]
-    pub supply_id: Option<String>,
+pub struct UpdateSuppliesDispatchMethodResponse {
+    #[serde(rename = "results", skip_serializing_if = "Option::is_none")]
+    pub results: Option<Vec<models::UpdatedSuppliesDispatchMethod>>,
 }
 
-impl UpdatedSuppliesShippingMethod {
-    /// Результат обработки запроса для одной поставки
-    pub fn new() -> UpdatedSuppliesShippingMethod {
-        UpdatedSuppliesShippingMethod {
-            error: None,
-            success: None,
-            supply_id: None,
-        }
+impl UpdateSuppliesDispatchMethodResponse {
+    pub fn new() -> UpdateSuppliesDispatchMethodResponse {
+        UpdateSuppliesDispatchMethodResponse { results: None }
     }
 }

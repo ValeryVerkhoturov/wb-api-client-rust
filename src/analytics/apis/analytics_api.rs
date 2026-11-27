@@ -875,7 +875,7 @@ pub async fn post_v2_search_report_table_groups(
 /// Метод формирует набор данных об остатках по складам.  Данные по складам продавца приходят в агрегированном виде — без детализации по конкретным складам — эти записи будут с `\"regionName\":\"Свой склад\"` или `\"regionName\":\"Свой склад СГТ\"` и `\"offices\":[]`.  Данные отчёта обновляются 1 раз в 2 часа.  [Лимит запросов](https://dev.wildberries.ru/openapi/api-information#tag/introduction/Limity-zaprosov) на один профиль продавца: | Тип | Период | Лимит | Интервал | Всплеск | | --- | --- | --- | --- | --- | | Персональный | 1 мин | 3 запроса | 20 сек | 3 запроса | | Сервисный | 1 мин | 3 запроса | 20 сек | 3 запроса | | Базовый с секретом | 1 мин | 3 запроса | 20 сек | 3 запроса | | Базовый | 1 ч | 2 запроса | 30 мин | 1 запрос |  Library doc: https://valeryverkhoturov.github.io/wb-api-client-docs/reference/api/analytics/post-api-v2-stocks-report-offices
 pub async fn post_v2_stocks_report_offices(
     configuration: &configuration::Configuration,
-    table_shipping_office_request: models::TableShippingOfficeRequest,
+    table_dispatch_office_request: models::TableDispatchOfficeRequest,
 ) -> Result<models::PostV2StocksReportOfficesResponse200, Error<PostV2StocksReportOfficesError>> {
     let local_var_configuration = configuration;
 
@@ -895,7 +895,7 @@ pub async fn post_v2_stocks_report_offices(
     if let Some(ref local_var_token) = local_var_configuration.bearer_access_token {
         local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.expose_secret());
     };
-    local_var_req_builder = local_var_req_builder.json(&table_shipping_office_request);
+    local_var_req_builder = local_var_req_builder.json(&table_dispatch_office_request);
 
     let local_var_req = local_var_req_builder.build()?;
     let local_var_resp = local_var_client.execute(local_var_req).await?;

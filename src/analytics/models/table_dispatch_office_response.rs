@@ -12,18 +12,18 @@ use crate::analytics::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct TableShippingOfficeResponse {
+pub struct TableDispatchOfficeResponse {
     /// Множество данных по регионам отгрузки
     #[serde(rename = "regions", skip_serializing_if = "Option::is_none")]
-    pub regions: Option<Vec<models::TableShippingOfficeItem>>,
+    pub regions: Option<Vec<models::TableDispatchOfficeItem>>,
     /// Валюта отчёта
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
 }
 
-impl TableShippingOfficeResponse {
-    pub fn new() -> TableShippingOfficeResponse {
-        TableShippingOfficeResponse {
+impl TableDispatchOfficeResponse {
+    pub fn new() -> TableDispatchOfficeResponse {
+        TableDispatchOfficeResponse {
             regions: None,
             currency: None,
         }

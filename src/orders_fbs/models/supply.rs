@@ -26,10 +26,10 @@ pub struct Supply {
     pub is_b2b: Option<Option<bool>>,
     /// Можно ли отгрузить заказ на ПВЗ:   - `false` — нет   - `true` — да
     #[serde(
-        rename = "isPickupPointShipmentAllowed",
+        rename = "isPickupPointDispatchAllowed",
         skip_serializing_if = "Option::is_none"
     )]
-    pub is_pickup_point_shipment_allowed: Option<bool>,
+    pub is_pickup_point_dispatch_allowed: Option<bool>,
     /// Флаг закрытия поставки:   - `true` — закрыта   - `false` — открыта
     #[serde(rename = "done", skip_serializing_if = "Option::is_none")]
     pub done: Option<bool>,
@@ -119,7 +119,7 @@ impl Supply {
         Supply {
             id: None,
             is_b2b: None,
-            is_pickup_point_shipment_allowed: None,
+            is_pickup_point_dispatch_allowed: None,
             done: None,
             created_at: None,
             closed_at: None,
